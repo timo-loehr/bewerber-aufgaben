@@ -11,7 +11,7 @@ namespace Solutions;
 public class MultiplesOfThreeOrFive
 {
 
-    public static int getSumOfMultiplesOfThreeOrFive(int limit)
+    public static int GetSumOfMultiplesOfThreeOrFive(int limit)
     {
         if (limit <= 0) return 0;
 

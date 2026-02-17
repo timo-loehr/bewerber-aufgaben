@@ -12,7 +12,7 @@ namespace Solutions;
 public class SumOfEvenFibonacciNumbers
 {
 
-    public static int getSumOfEvenFibonacciNumbers(int maxValue)
+    public static int GetSumOfEvenFibonacciNumbers(int maxValue)
     {
         if (maxValue < 2) return 0;
 

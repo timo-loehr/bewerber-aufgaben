@@ -17,8 +17,8 @@ public class MultiplesOfThreeOrFiveTest
     [Theory]
     [InlineData(0)]
     [InlineData(-1)]
-    public void NonPositiveLimit_Returns0(int limit)
+    public void NonPositiveLimit_ThrowsArgumentException(int limit)
     {
-        Assert.Equal(0, MultiplesOfThreeOrFive.GetSumOfMultiplesOfThreeOrFive(limit));
+        Assert.Throws<ArgumentException>(() => MultiplesOfThreeOrFive.GetSumOfMultiplesOfThreeOrFive(limit));
     }
 }

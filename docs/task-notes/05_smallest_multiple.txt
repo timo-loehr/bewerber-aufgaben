@@ -1,0 +1,27 @@
+Aufgabe 5: Smallest Multiple
+
+Ziel:
+Kleinste positive Zahl berechnen, die durch alle Zahlen von 1 bis n ohne Rest teilbar ist.
+
+Teststrategie:
+1. Beispiel aus der Aufgabe prüfen => Bereich 1 bis 10 liefert 2520
+2. Zielwert der Aufgabe prüfen => Bereich 1 bis 20 liefert 232792560
+
+Schritt für Schritt:
+1. Wir initialisieren das Ergebnis mit dem Wert 1.
+   Dieser Wert wird in jeder Iteration erweitert.
+
+2. Danach iterieren wir von 2 bis n.
+   In jedem Schritt kombinieren wir das aktuelle Ergebnis mit der nächsten Zahl im Bereich.
+
+3. Die Kombination erfolgt über das kleinste gemeinsame Vielfache.
+   Dadurch bleibt das Ergebnis so klein wie möglich und ist trotzdem durch alle bisher betrachteten Zahlen teilbar.
+
+4. Das kleinste gemeinsame Vielfache wird über den größten gemeinsamen Teiler berechnet.
+   Dadurch werden gemeinsame Faktoren nur einmal berücksichtigt und das Ergebnis bleibt korrekt.
+
+5. Den größten gemeinsamen Teiler bestimmen wir iterativ:
+   - Solange der zweite Wert nicht 0 ist, berechnen wir den Rest aus Division.
+   - Danach verschieben wir die Werte und wiederholen den Schritt.
+   - Sobald der zweite Wert 0 ist, ist der erste Wert der gesuchte größte gemeinsame Teiler.
+

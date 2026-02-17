@@ -1,0 +1,26 @@
+Aufgabe 4: Largest Palindrome Product
+
+Ziel:
+Größtes Palindrom finden, das als Produkt zweier Zahlen mit gegebener Stellenzahl entsteht.
+
+Teststrategie:
+1. Palindrom-Prüfung separat testen => z. B. 9009 true, 12345 false
+2. Ergebnis für bekannte Fälle prüfen => 1-stellig 9, 2-stellig 9009, 3-stellig 906609
+3. Randfälle prüfen => ungültige digits-Werte (0 und negativ) sollen Exception werfen
+
+Schritt für Schritt:
+1. Eingabe validieren: digits muss größer als 0 sein, sonst wird eine Exception geworfen.
+
+2. Suchbereich berechnen:
+   - max = 10^digits - 1
+   - min = 10^(digits - 1)
+   Damit prüfen wir genau die Zahlen mit der gewünschten Stellenzahl.
+
+3. Mit zwei verschachtelten Schleifen alle Produkte prüfen, von groß nach klein.
+
+4. Früher Abbruch in der inneren Schleife:
+   Wenn das aktuelle Produkt schon kleiner/gleich dem bisher größten Palindrom ist, können wir dort stoppen.
+
+5. Ist ein Produkt ein Palindrom, wird es als neues Maximum gespeichert.
+
+6. Für die Palindrom-Prüfung wird die Zahl in einen String umgewandelt und mit der umgedrehten Version verglichen.

@@ -1,0 +1,18 @@
+Aufgabe 1: Multiples of 3 or 5
+
+Ziel:
+Summe aller Zahlen unterhalb eines Limits bestimmen, die durch 3 oder 5 teilbar sind.
+
+Teststrategie:
+1. Test für Beispiel-Fall => Limit 10 liefert 23
+2. Zielwert für die Aufgabe liefert richtiges Ergebnis
+3. Randfälle prüfen. 0 und negative Zahlen sollen eine Exception werfen
+
+Schritt für Schritt:
+1. Randfall definiert: Wenn eine negative Zahl oder die Zahl 0 in die Methode gegeben wird, wird eine Exception geworfen.
+
+2. Mit Hilfe von Link eine Range festlegen, beginnend bei 0 und bis zu dem Limit, das wir der Methode mitgeben
+
+3. Filter anwenden => Wir prüfen mit Hilfe des Modulo Operators, dass wir nur Zahlen verwenden, bei denen die Division durch 3 ODER 5 eine Restmenge von 0 hat.
+
+4. Da wir nun alle Zahlen gefiltert haben können diese summiert und zurückgegeben werden

@@ -1,0 +1,23 @@
+Aufgabe 3: Largest Prime Factor
+
+Ziel:
+Größten Primfaktor einer gegebenen Zahl bestimmen.
+
+Teststrategie:
+1. Kleine Zahlen prüfen => z. B. 2, 3, 4, 5, 6, 8, 9
+2. Beispiel aus der Aufgabe => 13195 liefert 29
+3. Zielwert der Aufgabe => 600851475143 liefert 6857
+4. Randfälle prüfen => 0, 1 und negative Zahlen liefern 0
+
+Schritt für Schritt:
+1. Randfall definiert: Wenn die Zahl kleiner als 2 ist, wird 0 zurückgegeben.
+
+2. Danach teilen wir zuerst alle Faktoren 2 weg.
+   Das reduziert die Zahl früh und wir müssen später nur noch ungerade Faktoren prüfen.
+
+3. Anschließend prüfen wir ungerade Faktoren ab 3 in 2er-Schritten.
+
+4. Wenn ein Faktor passt, teilen wir ihn so lange heraus, bis er nicht mehr passt.
+   Dadurch wird die Restzahl schnell kleiner und die Suche effizienter.
+
+5. Falls am Ende noch eine Restzahl > 1 übrig ist, ist genau diese Zahl der größte Primfaktor.

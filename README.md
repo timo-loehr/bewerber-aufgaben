@@ -10,13 +10,33 @@ Der Fokus liegt auf **sauberem Code**, **Testbarkeit** und **testgetriebener Ent
 
 ```
 .
+├─ .github/
+│  └─ workflows/
+│     └─ dotnet.yml
+│
 ├─ Solutions/
 │  ├─ Solutions.csproj
-│  └─ MultiplesOfThreeOrFive.cs
+│  ├─ MultiplesOfThreeOrFive.cs
+│  ├─ SumOfEvenFibonacciNumbers.cs
+│  ├─ LargestPrimeFactor.cs
+│  ├─ LargestPalindromeProduct.cs
+│  └─ SmallestMultiple.cs
 │
 ├─ Solutions.Tests/
 │  ├─ Solutions.Tests.csproj
-│  └─ MultiplesOfThreeOrFiveTests.cs
+│  ├─ MultiplesOfThreeOrFiveTests.cs
+│  ├─ SumOfEvenFibonacciNumbersTests.cs
+│  ├─ LargestPrimeFactorTests.cs
+│  ├─ LargestPalindromeProductTests.cs
+│  └─ SmallestMultipleTests.cs
+│
+├─ docs/
+│  └─ task-notes/
+│     ├─ 01_multiples_of_3_or_5.txt
+│     ├─ 02_sum_of_even_fibonacci_numbers.txt
+│     ├─ 03_largest_prime_factor.txt
+│     ├─ 04_largest_palindrome_product.txt
+│     └─ 05_smallest_multiple.txt
 │
 └─ README.md
 ```
@@ -26,6 +46,9 @@ Der Fokus liegt auf **sauberem Code**, **Testbarkeit** und **testgetriebener Ent
 
 - **Solutions.Tests**  
   Enthält Unit Tests (xUnit), die das Verhalten der Lösungen absichern.
+
+- **docs/task-notes**  
+  Enthält pro Aufgabe eine kurze Schritt-für-Schritt-Erklärung, inklusive Begründung der gewählten Lösung.
 
 ---
 
@@ -61,6 +84,31 @@ Alle Tests können mit folgendem Befehl ausgeführt werden:
 ```
 dotnet test
 ```
+
+---
+
+## CI / Pipeline
+
+Zusätzlich zu lokalen Tests werden die Tests auch automatisch in der Pipeline ausgeführt  
+(GitHub Actions, siehe `.github/workflows/dotnet.yml`).
+
+Die Pipeline führt bei Pushes und Pull Requests auf `main` folgende Schritte aus:
+
+1. `dotnet restore`
+2. `dotnet build --no-restore`
+3. `dotnet test --no-build --verbosity normal`
+
+---
+
+## Lösungsnotizen je Aufgabe
+
+Für jede Aufgabe gibt es eine separate Notizdatei mit Vorgehen und Begründung:
+
+- `docs/task-notes/01_multiples_of_3_or_5.txt`
+- `docs/task-notes/02_sum_of_even_fibonacci_numbers.txt`
+- `docs/task-notes/03_largest_prime_factor.txt`
+- `docs/task-notes/04_largest_palindrome_product.txt`
+- `docs/task-notes/05_smallest_multiple.txt`
 
 ---
 

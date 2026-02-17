@@ -1,0 +1,30 @@
+Aufgabe 2: Sum of Even Fibonacci Numbers
+
+Ziel:
+Summe aller geraden Fibonacci-Zahlen berechnen, deren Wert ein Maximum nicht überschreitet.
+
+Teststrategie:
+1. Test für einfachen Wert => MaxValue 100 liefert 44
+2. Zielwert aus der Aufgabe => MaxValue 4.000.000 liefert 4.613.732
+3. Randfälle prüfen => 0, 1 und negative Werte liefern 0
+4. Beide Implementierungen (imperativ + funktional) müssen identische Ergebnisse liefern
+
+Schritt für Schritt:
+1. Randfall definiert: Wenn maxValue kleiner als 2 ist, wird 0 zurückgegeben.
+
+2. Fibonacci-Folge wird mit zwei Startwerten (1 und 2) aufgebaut und schrittweise weiterberechnet.
+
+3. Bei jeder Zahl wird geprüft, ob sie gerade ist. Nur dann wird sie zur Summe addiert.
+
+4. Wir addieren die erste Zahl mit der Zweiten, um so die Fibonacci manuell zu simulieren.
+
+5. Der Prozess läuft so lange, bis die aktuelle Fibonacci-Zahl größer als maxValue ist.
+
+Im zweiten Ansatz wollte Ich einen stärker funktionalen, deklarativen Stil präsentieren, indem ich die Erzeugung der Fibonacci-Sequenz von der Filter- und Aggregationslogik trenne und diese über IEnumerable und LINQ ausdrücke.
+
+Warum Ich hier eine Alternativlösung anbieten:
+1. Ich möchte damit bewusst zwei Denkweisen zeigen:
+   - imperativ (Schleife, sehr direkt, sehr performant)
+   - funktional(erer) (IEnumerable + LINQ, sehr deklarativ und gut lesbar)
+
+2. Die Tests sichern ab, dass beide Varianten fachlich dasselbe Ergebnis liefern.

@@ -13,7 +13,7 @@ public class MultiplesOfThreeOrFive
 
     public static int GetSumOfMultiplesOfThreeOrFive(int limit)
     {
-        if (limit <= 0) return 0;
+        if (limit <= 0) throw new ArgumentException("Limit must be a positive integer.", nameof(limit));
 
         return Enumerable
             .Range(0, limit)

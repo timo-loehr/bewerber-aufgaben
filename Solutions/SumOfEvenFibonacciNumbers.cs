@@ -12,7 +12,7 @@ namespace Solutions;
 public class SumOfEvenFibonacciNumbers
 {
 
-    public static int GetSumOfEvenFibonacciNumbers(int maxValue)
+    public static int GetSumOfEvenFibonacciNumbersImperative(int maxValue)
     {
         if (maxValue < 2) return 0;
 
@@ -34,4 +34,41 @@ public class SumOfEvenFibonacciNumbers
         return sum;
     }
 
+    /*
+    Alternative solution
+    This version favors a more functional, declarative style using lazy sequences (IEnumerable + LINQ).
+    It improves readability and composability by separating sequence generation from aggregation,
+    at the cost of some performance overhead compared to the imperative loop-based solution.
+     */
+    public static int GetSumOfEvenFibonacciNumbersFunctional(int maxValue) =>
+    maxValue < 2
+        ? 0
+        : FibonacciStartingWith1And2()
+            .TakeWhile(n => n <= maxValue)
+            .Where(n => n % 2 == 0)
+            .Sum();
+
+    private static IEnumerable<int> FibonacciStartingWith1And2()
+    {
+        int a = 1, b = 2;
+        while (true)
+        {
+            yield return a;
+            (a, b) = (b, checked(a + b));
+        }
+    }
+
+    /*
+    Why two solutions?
+
+    1) Loop-based (imperative) implementation:
+       - fastest and allocation-free in practice
+       - minimal overhead (no iterator/LINQ pipeline)
+       - best choice for performance-critical code
+
+    2) IEnumerable + LINQ (functional-style) implementation:
+       - more declarative / expression-first
+       - separates sequence generation from filtering and aggregation
+       - very readable and composable, but slightly slower due to iterator + LINQ overhead
+    */
 }

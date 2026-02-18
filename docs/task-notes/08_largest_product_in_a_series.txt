@@ -1,0 +1,87 @@
+Aufgabe 8: Largest Product in a Series
+
+Ziel:
+Das größte Produkt von k benachbarten Ziffern in einer Ziffernfolge bestimmen
+(für Project Euler konkret: k = 13 in der gegebenen 1000-stelligen Zahl, Ergebnis = 23514624000).
+
+Teststrategie:
+1. Bekanntes Beispiel aus der Aufgabe prüfen:
+   - k = 4 -> 5832
+2. Zielwert prüfen:
+   - k = 13 -> 23514624000
+3. Sonderfall, der eine 0 mitten in der Folge enthält:
+   - "1230456", k = 3 -> 120
+4. Ungültige Eingaben absichern:
+   - k < 1 -> ArgumentOutOfRangeException
+   - k > series.Length -> ArgumentOutOfRangeException
+   - series enthält Nicht-Ziffern -> ArgumentException
+   - series == null -> ArgumentNullException
+
+Lösungsidee:
+Wir schieben ein Fenster der Länge k über die Zeichenkette.
+Für jedes Fenster berechnen wir das Produkt der enthaltenen Ziffern und merken uns das Maximum.
+Wenn im aktuellen Fenster eine 0 vorkommt, ist das Produkt sofort 0 und das Fenster kann direkt beendet werden.
+
+Schritt für Schritt:
+1. Guard Clauses:
+   - null prüfen (series darf nicht null sein)
+   - k muss positiv sein
+   - k darf nicht größer als die Eingabelänge sein
+
+2. Maximalwert initialisieren:
+   - maxProduct startet bei 0
+
+3. Startpositionen des Fensters durchlaufen:
+   - start von 0 bis einschließlich series.Length - k
+   - so wird jedes mögliche k-Fenster genau einmal betrachtet
+
+4. Produkt im aktuellen Fenster berechnen:
+   - product startet bei 1
+   - offset läuft von 0 bis k - 1
+   - aktuelles Zeichen steht an Position start + offset
+
+5. Zeichen in Ziffer umwandeln:
+   - digit = series[start + offset] - '0'
+   - danach validieren: digit muss zwischen 0 und 9 liegen
+   - sonst ArgumentException
+
+   Wichtiger Hintergrund zu "digit = c - '0'":
+   Warum funktioniert das?
+   Zeichen wie '0', '1', ..., '9' haben fortlaufende numerische Codes
+   (in ASCII ebenso wie in Unicode im Basic Latin Bereich):
+   - '0' = 48
+   - '1' = 49
+   - ...
+   - '9' = 57
+
+   Bsp. : '7' ist äquivalent zu 55 und '0' zu 48 => 55-48 = 7, somit haben wir aus dem Char eine Zahl gemacht 
+
+6. Null-Optimierung:
+   - wenn digit == 0:
+     - product = 0
+     - innere Schleife sofort abbrechen (break)
+
+7. Maximum aktualisieren:
+   - nach jedem Fenster: if (product > maxProduct) maxProduct = product
+
+8. Ergebnis zurückgeben:
+   - return maxProduct
+
+2. Konsequenz:
+   Wenn c = '7', dann ist:
+   c - '0' = 55 - 48 = 7
+   Dadurch erhält man direkt den ganzzahligen Ziffernwert.
+
+3. Warum prüfen wir danach noch 0..9?
+   Für Nicht-Ziffern ergibt die Subtraktion irgendeinen anderen Wert.
+   Beispiel:
+   - c = 'A' -> 65 - 48 = 17 (keine gültige Dezimalziffer)
+   Mit der Bereichsprüfung (digit < 0 || digit > 9) erkennen wir das sauber.
+
+Mathematischer Hintergrund:
+1. Fensterprinzip:
+   Für eine Länge n und Fenstergröße k gibt es n - k + 1 mögliche Fenster.
+
+2. Produkt mit Null:
+   Sobald ein Faktor 0 ist, wird das gesamte Produkt 0.
+   Das rechtfertigt den sofortigen Abbruch des Fensters.

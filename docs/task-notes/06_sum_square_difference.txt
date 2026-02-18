@@ -1,0 +1,32 @@
+Aufgabe 6: Sum Square Difference
+
+Ziel:
+Differenz zwischen dem Quadrat der Summe und der Summe der Quadrate der ersten n natürlichen Zahlen berechnen.
+
+Teststrategie:
+1. Beispiel aus der Aufgabe prüfen => für n = 10 ist das Ergebnis 2640
+2. Zielwert der Aufgabe prüfen => für n = 100 ist das Ergebnis 25164150
+3. Randfälle prüfen => n <= 1 liefert 0
+
+Schritt für Schritt:
+1. Einstiegsmethode kapseln:
+   Die öffentliche Methode gibt bei n <= 1 sofort 0 zurück.
+   Für gültige Werte wird die Differenz aus zwei klar getrennten Berechnungen gebildet.
+
+2. Helper-Methode für das Quadrat der Summe:
+   - Zahlenbereich 1..n mit Enumerable.Range erzeugen
+   - Werte als long summieren
+   - Ergebnis quadrieren
+
+3. Helper-Methode für die Summe der Quadrate:
+   - Zahlenbereich 1..n mit Enumerable.Range erzeugen
+   - Jeden Wert i zu i*i abbilden
+   - Quadrate als long summieren
+
+4. Finale Differenz bilden:
+   squareOfSum - sumOfSquares
+
+5. Warum diese Struktur:
+   - Lesbarkeit durch getrennte Verantwortung
+   - Testbarkeit über reproduzierbare Endergebnisse
+   - Funktionaler Stil durch deklarative LINQ-Operationen statt manueller Schleifenlogik

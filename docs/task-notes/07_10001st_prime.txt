@@ -1,0 +1,79 @@
+Aufgabe 7: 10001st Prime
+
+Ziel:
+Die n-te Primzahl bestimmen (für die Aufgabe konkret: n = 10001, Ergebnis = 104743).
+
+Teststrategie:
+1. Kleine bekannte Werte prüfen:
+   - n = 1 -> 2
+   - n = 6 -> 13
+2. Zielwert prüfen:
+   - n = 10001 -> 104743
+3. Ungültige Eingaben absichern:
+   - n < 1 -> ArgumentOutOfRangeException
+
+Lösungsidee:
+Wir erzeugen eine fortlaufende Primzahlfolge und nehmen daraus das n-te Element.
+Das passiert mit einer lazy Sequence (yield), also nur so weit, wie wirklich benötigt.
+
+Schritt für Schritt:
+1. Guard Clause in der Einstiegsmethode:
+   Wenn n < 1 ist, wird eine ArgumentOutOfRangeException geworfen.
+   Grund: Es gibt keine "0-te" oder negative Primzahl.
+
+2. N-te Primzahl aus der Folge holen:
+   - GeneratePrimes() erzeugt Primzahlen in aufsteigender Reihenfolge.
+   - Skip(n - 1) überspringt die ersten n-1 Primzahlen.
+   - First() liefert die nächste Zahl, also exakt die n-te Primzahl.
+
+3. Primzahlen effizient erzeugen:
+   - Startwert ist 2 (erste Primzahl).
+   - Danach werden nur ungerade Kandidaten geprüft: 3, 5, 7, ...
+   - Gerade Zahlen > 2 werden übersprungen, weil sie immer durch 2 teilbar sind.
+
+4. Bekannte Primzahlen zwischenspeichern:
+   - Eine Liste knownPrimes enthält alle bereits gefundenen Primzahlen.
+   - Das reduziert die Arbeit bei neuen Kandidaten, weil nur sinnvolle Teiler geprüft werden.
+
+5. Helper-Methode IsPrime(number, knownPrimes):
+   Kernlogik:
+   - limit = Wurzel (Ganzzahl durch int Casting) der Nummer, die geprüft wird.
+     Es reicht aus, nur bis zu dieser Grenze nach Teilern zu suchen, weil jede zusammengesetzte Zahl mindestens einen Faktor besitzt, der kleiner oder gleich ihrer Quadratwurzel ist.
+   - Prüfe nur bekannte Primzahlen p mit p <= limit
+   - Wenn kein p die Zahl teilt (number % p != 0), dann ist die Zahl prim
+
+Mathematischer Hintergrund:
+1. Warum reicht sqrt(number)?
+   Wenn number zusammengesetzt ist, gilt number = a * b.
+   Dann muss mindestens einer der beiden Faktoren <= sqrt(number) sein.
+   Sonst wären beide > sqrt(number), und a * b wäre größer als number (Widerspruch).
+
+2. Warum nur Primteiler prüfen?
+   Jeder zusammengesetzte Teiler besteht wiederum aus Primfaktoren.
+   Wenn eine Zahl einen Teiler hat, hat sie also auch einen Primteiler.
+   Deshalb reicht es, gegen Primzahlen zu testen.
+
+Beispiel 1 (Primzahl):
+number = 29
+- sqrt(29) ≈ 5.38 -> limit = 5
+- relevante bekannte Primzahlen: 2, 3, 5
+- 29 % 2 != 0, 29 % 3 != 0, 29 % 5 != 0
+- kein Teiler gefunden -> 29 ist prim
+
+Beispiel 2 (keine Primzahl):
+number = 35
+- sqrt(35) ≈ 5.91 -> limit = 5
+- relevante bekannte Primzahlen: 2, 3, 5
+- 35 % 5 == 0
+- Teiler gefunden -> 35 ist nicht prim
+
+Warum die Struktur sinnvoll ist:
+- Klar getrennte Verantwortlichkeiten:
+  - Einstiegsmethode: Validierung + Auswahl der n-ten Primzahl
+  - Generator: Erzeugung der Primzahlfolge
+  - Helper: mathematischer Primzahltest
+- Gut testbar:
+  - Kleine Beispiele + Zielwert + Randfälle
+- Funktionaler Stil:
+  - Deklarative LINQ-Kette (Skip, First, TakeWhile, All)
+  - Lazy Evaluation über IEnumerable/yield
